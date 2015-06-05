@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 
 var React = require('react');
+var Header = require('./tile.header');
 
 module.exports = React.createClass({
 
@@ -16,14 +17,7 @@ module.exports = React.createClass({
 
 		return ( 
 			<div className="tile" style={tileStyle}>
-				<div className="header">
-					<div className="icon">
-						<i className="fa fa-star fa-4x" />
-					</div>
-					<div className="text">
-						<h3>{this.props.title}</h3>
-					</div>
-				</div>
+				<Header icon="star" title="Hur känns det just nu?" />
 				<div className="content">
 					<div className="rate-group">
 						<div className="rate-item">

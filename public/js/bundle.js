@@ -3,6 +3,8 @@
 var React = require('react');
 var Mood = require('./components/mood.react');
 var VoteTile = require('./components/tile.vote');
+var Profile = require('./components/tile.profile');
+var Chart = require('./components/tile.chart');
 
 // Snag the initial state that was passed from the server side
 //var initialState = JSON.parse(document.getElementById('initial-state').innerHTML)
@@ -10,12 +12,23 @@ var VoteTile = require('./components/tile.vote');
 $(function() {
 	console.log('loaded');
 	React.renderComponent(
-  		VoteTile({title: "Hur mår du?", background: "#DAA520"}),
+  		VoteTile({title: "Hur mår du?", background: "#CD0000"}),
   			document.getElementById('tile_vote')
 	);
 
+	React.renderComponent(
+  		Profile({background: "#DAA520"}),
+  			document.getElementById('tile_profile')
+	);
+
+	React.renderComponent(
+  		Chart({background: "#4682B4"}),
+  			document.getElementById('tile_chart')
+	);
+
+	
 });
-},{"./components/mood.react":"D:\\Projects\\Repos\\mood\\app\\components\\mood.react.js","./components/tile.vote":"D:\\Projects\\Repos\\mood\\app\\components\\tile.vote.js","react":"D:\\Projects\\Repos\\mood\\node_modules\\react\\react.js"}],"D:\\Projects\\Repos\\mood\\app\\components\\mood.react.js":[function(require,module,exports){
+},{"./components/mood.react":"D:\\Projects\\Repos\\mood\\app\\components\\mood.react.js","./components/tile.chart":"D:\\Projects\\Repos\\mood\\app\\components\\tile.chart.js","./components/tile.profile":"D:\\Projects\\Repos\\mood\\app\\components\\tile.profile.js","./components/tile.vote":"D:\\Projects\\Repos\\mood\\app\\components\\tile.vote.js","react":"D:\\Projects\\Repos\\mood\\node_modules\\react\\react.js"}],"D:\\Projects\\Repos\\mood\\app\\components\\mood.react.js":[function(require,module,exports){
 /** @jsx React.DOM */
 
 var React = require('react');
@@ -35,10 +48,109 @@ module.exports = React.createClass({displayName: 'exports',
 		);
 	}
 });
-},{"react":"D:\\Projects\\Repos\\mood\\node_modules\\react\\react.js"}],"D:\\Projects\\Repos\\mood\\app\\components\\tile.vote.js":[function(require,module,exports){
+},{"react":"D:\\Projects\\Repos\\mood\\node_modules\\react\\react.js"}],"D:\\Projects\\Repos\\mood\\app\\components\\tile.chart.js":[function(require,module,exports){
 /** @jsx React.DOM */
 
 var React = require('react');
+var Header = require('./tile.header');
+
+module.exports = React.createClass({displayName: 'exports',
+
+	
+
+	componentDidMount: function() {
+		var data = {
+	    	// A labels array that can contain any sort of values
+			labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+			// Our series array that contains series objects or in this case series data arrays
+			series: [
+				[4,3,3,4,5,5,4,3,2,3]
+			]
+		};
+		var options = {
+		    width: 300,
+    		height: 200
+  		};
+  		var a = new Chartist.Line('.ct-chart', data);
+	 },
+	render: function (){
+		var tileStyle = {
+		  backgroundColor: this.props.background
+		};
+
+		return ( 
+			React.DOM.div({className: "tile", style: tileStyle}, 
+				Header({icon: "area-chart", title: "Chart"}), 
+				React.DOM.div({className: "content"}, 
+					React.DOM.div({className: "ct-chart ct-double-octave"})
+				)
+			)
+		);
+	}
+});
+},{"./tile.header":"D:\\Projects\\Repos\\mood\\app\\components\\tile.header.js","react":"D:\\Projects\\Repos\\mood\\node_modules\\react\\react.js"}],"D:\\Projects\\Repos\\mood\\app\\components\\tile.header.js":[function(require,module,exports){
+/** @jsx React.DOM */
+
+var React = require('react');
+
+module.exports = React.createClass({displayName: 'exports',
+
+	render: function (){
+		var iconClass = 'fa fa-' + this.props.icon + ' fa-4x';
+		return ( 
+			React.DOM.div({className: "header"}, 
+				React.DOM.div({className: "icon"}, 
+					React.DOM.i({className: iconClass})
+				), 
+				React.DOM.div({className: "text"}, 
+					React.DOM.h3(null, this.props.title)
+				)
+			)
+		);
+	}
+});
+},{"react":"D:\\Projects\\Repos\\mood\\node_modules\\react\\react.js"}],"D:\\Projects\\Repos\\mood\\app\\components\\tile.profile.js":[function(require,module,exports){
+/** @jsx React.DOM */
+
+var React = require('react');
+var Header = require('./tile.header');
+
+module.exports = React.createClass({displayName: 'exports',
+
+	render: function (){
+		var tileStyle = {
+		  backgroundColor: this.props.background
+		};
+
+		var profile = this.props.profile;
+
+		return ( 
+			React.DOM.div({className: "tile", style: tileStyle}, 
+				Header({icon: "user", title: "Profile"}), 
+				React.DOM.div({className: "content"}, 
+			        React.DOM.div({className: "panel-body"}, 
+			          React.DOM.div({className: "row"}, 
+			            React.DOM.div({className: "col-xs-12 col-sm-4 text-center"}, 
+			              React.DOM.img({className: "center-block img-circle img-thumbnail img-responsive img-profile", src: "https://lh3.googleusercontent.com/-BSlduqSetls/AAAAAAAAAAI/AAAAAAAAANI/A0CX9bFOiB4/photo.jpg?sz=50", alt: ""})
+			            ), 
+			            React.DOM.div({className: "col-xs-12 col-sm-8"}, 
+			              React.DOM.h2(null, "Peter Qwärnström"), 
+			              React.DOM.p(null, 
+			                React.DOM.strong(null, "Email: "), "peter.qwarnstrom@gmail.com"
+			              )
+			            )
+			          )
+			      )
+				)
+			)
+		);
+	}
+});
+},{"./tile.header":"D:\\Projects\\Repos\\mood\\app\\components\\tile.header.js","react":"D:\\Projects\\Repos\\mood\\node_modules\\react\\react.js"}],"D:\\Projects\\Repos\\mood\\app\\components\\tile.vote.js":[function(require,module,exports){
+/** @jsx React.DOM */
+
+var React = require('react');
+var Header = require('./tile.header');
 
 module.exports = React.createClass({displayName: 'exports',
 
@@ -54,14 +166,7 @@ module.exports = React.createClass({displayName: 'exports',
 
 		return ( 
 			React.DOM.div({className: "tile", style: tileStyle}, 
-				React.DOM.div({className: "header"}, 
-					React.DOM.div({className: "icon"}, 
-						React.DOM.i({className: "fa fa-star fa-4x"})
-					), 
-					React.DOM.div({className: "text"}, 
-						React.DOM.h3(null, this.props.title)
-					)
-				), 
+				Header({icon: "star", title: "Hur känns det just nu?"}), 
 				React.DOM.div({className: "content"}, 
 					React.DOM.div({className: "rate-group"}, 
 						React.DOM.div({className: "rate-item"}, 
@@ -96,7 +201,7 @@ module.exports = React.createClass({displayName: 'exports',
 	}
 });
 
-},{"react":"D:\\Projects\\Repos\\mood\\node_modules\\react\\react.js"}],"D:\\Projects\\Repos\\mood\\node_modules\\react\\lib\\AutoFocusMixin.js":[function(require,module,exports){
+},{"./tile.header":"D:\\Projects\\Repos\\mood\\app\\components\\tile.header.js","react":"D:\\Projects\\Repos\\mood\\node_modules\\react\\react.js"}],"D:\\Projects\\Repos\\mood\\node_modules\\react\\lib\\AutoFocusMixin.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014 Facebook, Inc.
  *
