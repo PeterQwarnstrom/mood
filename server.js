@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 // Routing
-app.get('/', routes.main);
+app.get('/', routes.index);
 
 var appPort = Number(process.env.PORT || 4444);
 var server = app.listen(appPort);

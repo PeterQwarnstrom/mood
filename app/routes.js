@@ -10,5 +10,11 @@ module.exports =  {
 		//var markup = React.renderComponentToString(MoodComponent());
 		
 		res.render('main');
+	},
+	index : function(req, res) {
+		//var markup = React.renderComponentToString(MoodComponent());
+		
+		res.render('index');
 	}
+
 }

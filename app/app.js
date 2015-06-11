@@ -1,14 +1,12 @@
 /** @jsx React.DOM */
 var React = require('react');
-var Mood = require('./components/mood.react');
-var VoteTile = require('./components/tile.vote');
-var Profile = require('./components/tile.profile');
-var Chart = require('./components/tile.chart');
+var ChartContainer = require('./components/chartContainer');
 
 // Snag the initial state that was passed from the server side
 //var initialState = JSON.parse(document.getElementById('initial-state').innerHTML)
 
 $(function() {
+/*
 	console.log('loaded');
 	React.renderComponent(
   		<VoteTile title='Hur mår du?' background='#CD0000' />,
@@ -21,8 +19,14 @@ $(function() {
 	);
 
 	React.renderComponent(
-  		<Chart background='#4682B4' />,
+  		<Chart background='#4682B4' data={moods.getMoods()} />,
   			document.getElementById('tile_chart')
+	);
+*/
+
+	React.renderComponent(
+  		<ChartContainer />,
+  			document.getElementById('chartContainer')
 	);
 
 	
