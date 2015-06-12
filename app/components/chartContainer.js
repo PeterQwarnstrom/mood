@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 var React = require('react');
 var Chart = require('./chart');
+var Header = require('./tile.header');
 var ChartSpecifications = require('./chartSpecifications');
 var chartStore = require('../stores/chartStore');
 var chartActions = require('../actions/chartActions');
@@ -25,13 +26,17 @@ var ChartContainer = React.createClass({
     this.setState({
       chartSpecifications: chartStore.getSpecification(),
       chartData: chartStore.getData()
-    })
+    });
   },
   render: function(){
+    var tileStyle = {
+      backgroundColor: '#4682B4'
+    };
+
     return (
-      <div className="col-sm-6 col-md-offset-3">
-        <div className="col-sm-12">
-          <h3 className="text-center"> Chart </h3>
+      <div className="tile" style={tileStyle}>
+        <Header icon="area-chart" title="Chart" />
+        <div className="content">
           <ChartSpecifications spec={this.state.chartSpecifications} change={this.handleChangeSpecifiactions}/>
           <Chart data={this.state.chartData}/>
         </div>

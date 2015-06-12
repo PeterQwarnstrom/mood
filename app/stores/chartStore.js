@@ -10,7 +10,12 @@ var CHANGE_EVENT = 'change';
 
 var _store = {
   spefification : {
-      type: chartTypeConstants.MONTH_BY_DAY
+      type: chartTypeConstants.MONTH_BY_DAY,
+      series: []
+  },
+  chartData : {
+    labels: [],
+    series: []
   }
 };
 

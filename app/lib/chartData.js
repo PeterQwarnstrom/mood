@@ -22,29 +22,45 @@ function getDayByHourData() {
   var toDate = new Date();
 
   var labels = [];
-  var values = [];
+  var values1 = [];
+  var values2 = [];
   for (var i = 0; i < 24; i++) {
-    labels.push(fromDate.getHours());
-    values.push(randomIntFromInterval(1,5));
+    labels.push(fromDate.getHours().toString());
+    values1.push(randomIntFromInterval(1,5));
+    values2.push(randomIntFromInterval(1,5));
     fromDate = fromDate.addHours(1);
   }
 
   return {
     spefification : {
       type: chartTypeConstants.DAY_BY_HOUR,
+      series : [
+        {
+          name : 'Utvecklare i Betala-Kort',
+          users : [],
+          tags : ['TeamBetalaKort', 'Utvecklare' ]
+        },
+        {
+          name : 'Peter med support',
+          users : ['PeterQ'],
+          tags : ['Support']
+        }
+      ],
+    },
+    chartData: {
       timeFrame: {
         from: new Date().addHours(-12),
         to: new Date()
       },
-      users : null,
-      tags: ['Tag1']
-    },
-    chartData: {
       labels: labels,
       series: [
         {
-          name : "Tag1",
-          values : values  
+          name : 'Utvecklare i Betala-Kort',
+          values : values1  
+        },
+        {
+          name : 'Peter med support',
+          values : values2  
         }
       ]
     }
@@ -56,29 +72,45 @@ function getMonthByDayData() {
   var toDate = new Date();
 
   var labels = [];
-  var values = [];
+  var values1 = [];
+  var values2 = [];
   for (var i = 0; i < 30; i++) {
-    labels.push(fromDate.getDate());
-    values.push(randomIntFromInterval(1,5));
+    labels.push(fromDate.getDate().toString());
+    values1.push(randomIntFromInterval(1,5));
+    values2.push(randomIntFromInterval(1,5));
     fromDate = fromDate.addDays(1);
   }
 
   return {
     spefification : {
       type: chartTypeConstants.MONTH_BY_DAY,
+      series : [
+        {
+          name : 'Utvecklare i Betala-Kort',
+          users : [],
+          tags : ['TeamBetalaKort', 'Utvecklare' ]
+        },
+        {
+          name : 'Peter med support',
+          users : ['PeterQ'],
+          tags : ['Support']
+        }
+      ],
+    },
+    chartData: {
       timeFrame: {
         from: new Date().addHours(-30),
         to: new Date()
       },
-      users : null,
-      tags: ['Tag1']
-    },
-    chartData: {
       labels: labels,
       series: [
         {
-          name : "Tag1",
-          values : values  
+          name : 'Utvecklare i Betala-Kort',
+          values : values1  
+        },
+        {
+          name : 'Peter med support',
+          values : values2  
         }
       ]
     }
